@@ -4,17 +4,17 @@
 
 ### BATCH_JOB_INSTANCE 메타 테이블
 
-- `Job Parameter`에 따라 생성되는 테이블
+> `Job Parameter`에 따라 생성되는 테이블
 
-    - `Job Parameter`란 Spring Batch가 실행될 때 외부에서 받을 수 있는 파라미터
+- `Job Parameter`란 Spring Batch가 실행될 때 외부에서 받을 수 있는 파라미터
     
-    - 특정 날짜를 `Job Parameter`로 넘기면, Spring Batch에서는 해당 날짜 데이터로 조회, 가공, 입력등의 작업을 할 수 있다.
+- 특정 날짜를 `Job Parameter`로 넘기면, Spring Batch에서는 해당 날짜 데이터로 조회, 가공, 입력등의 작업을 할 수 있다.
     
 - 같은 Batch Job이라도 `Job Parameter`가 다르면, `BATCH_JOB_INSTANCE` 테이블에 기록된다.
 
-- `Job Parameter`가 같다면, 기록되지 않는다. (`JobInstanceAlreadyCompleteException`이 발생한다.)
+> `Job Parameter`가 같다면, 기록되지 않는다. (`JobInstanceAlreadyCompleteException`이 발생한다.)
 
-- 동일한 `Job Parameter`로 성공한 기록이 있을때만 재수행이 안되고, 실패한 기록이 있다면 재수행이 된다. (즉, 실패한 기록이 있는 상태에서 다시 실행하고, 성공 했을때 `JobInstanceAlreadyCompleteException`가 발생하지 않는다.)
+> 동일한 `Job Parameter`로 성공한 기록이 있을때만 재수행이 안되고, 실패한 기록이 있다면 재수행이 된다. (즉, 실패한 기록이 있는 상태에서 다시 실행하고, 성공 했을때 `JobInstanceAlreadyCompleteException`가 발생하지 않는다.)
 
 ### BATCH_JOB_EXECUTION 메타 테이블
 
