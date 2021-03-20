@@ -1,5 +1,9 @@
 # Batch Application
 
+- Spring Batch를 공부하고, 실습한다.
+
+- 중요한 내용들은 이해하고, 기록하자
+
 <br>
 
 ## BATCH_JOB_INSTANCE, BATCH_JOB_EXECUTION 메타 테이블
@@ -8,15 +12,17 @@
 
 - `Job Parameter`에 따라 생성되는 테이블
 
-   > `Job Parameter`란 Spring Batch가 실행될 때 외부에서 받을 수 있는 파라미터
+   - `Job Parameter`란 Spring Batch가 실행될 때 외부에서 받을 수 있는 파라미터
     
-   > 특정 날짜를 `Job Parameter`로 넘기면, Spring Batch에서는 해당 날짜 데이터로 조회, 가공, 입력등의 작업을 할 수 있다.
+   - 특정 날짜를 `Job Parameter`로 넘기면, Spring Batch에서는 해당 날짜 데이터로 조회, 가공, 입력등의 작업을 할 수 있다.
     
-   > 같은 Batch Job이라도 `Job Parameter`가 다르면, `BATCH_JOB_INSTANCE` 테이블에 기록된다.
+   - 같은 Batch Job이라도 `Job Parameter`가 다르면, `BATCH_JOB_INSTANCE` 테이블에 기록된다.
 
 - `Job Parameter`가 같다면, 기록되지 않는다. (`JobInstanceAlreadyCompleteException`이 발생한다.)
 
 - 동일한 `Job Parameter`로 성공한 기록이 있을때만 재수행이 안되고, 실패한 기록이 있다면 재수행이 된다. (즉, 실패한 기록이 있는 상태에서 다시 실행하고, 성공 했을때 `JobInstanceAlreadyCompleteException`가 발생하지 않는다.)
+
+<br>
 
 ### BATCH_JOB_EXECUTION 메타 테이블
 
@@ -25,6 +31,8 @@
 - `BATCH_JOB_INSTANCE` 테이블이 `부모` 이고, `BATCH_JOB_EXECUTION` 테이블이 `자식` 이라고 생각하면 된다.
 
 - `BATCH_JOB_EXECUTION` 테이블은 자신의 부모인 `BATCH_JOB_INSTANCE`의 `성공/실패` 했던 모든 내역을 가지고 있다.
+
+<br>
 
 ## StepScope, JobScope
 
@@ -37,6 +45,8 @@
 - 즉, `Bean의 생성 시점을 지정된 Scope가 실행되는 시점`으로 지연시킨다.
 
 - `Spring의 Request Scope` 처럼 `Step, Job이 실행되고 끝날때 생성 및 삭제가 이루어진다.`
+
+<br>
 
 ### Bean 생성 시점을 Application 실행 시점이 아닌, Step 혹은 Job의 실행 시점으로 지연 시키면서 얻는 장점?
 
@@ -53,7 +63,9 @@
     - `@StepScope` 없이 Step을 병렬적으로 실행시키게 되면, 서로 다른 `Step`에서 하나의 `Tasklet`을 두고 마구잡이로 상태를 변경하려고 할 것이다.
   
     - `@StepScope`가 있다면, 각각의 Step에서 별도의 `Tasklet을 생성하고, 관리하기 때문에 서로의 상태를 침범할 일이 없다.`
-  
+    
+<br>
+
 ## Job Parameter
 
 ### 중요한 특징 
@@ -61,7 +73,9 @@
 - `Job Parameter`는 Step, Tasklet, Reader등 Batch 컴포넌트 Bean 생성의 생성 시점에만 호출할 수 있다.
 
 - 정확히는 `Scope Bean`을 생성할때만 가능하다. 즉, `@StepScope`, `@JobScope`와 같은 `Bean을 생성할때만 Job Parameter가 생성되기 때문에 사용할 수 있다.`
- 
+
+<br>
+
 ### Job Parameter vs 시스템 변수 (Job Parameter를 써야만 하는 이유)
 
 - `시스템 변수`를 사용하게 되면 `Spring Batch의 Job Parameter 관련 기능을 쓰지 못하게 된다.`
@@ -75,6 +89,8 @@
 - `Job Parameter`를 사용하지 못하면, `Late Binding을 못하게 되는` 의미이다.
 
 - 외부에서 넘겨주는 파라미터에 따라 Batch가 다르게 동작해야 한다면, 이를 `시스템 변수`로 풀어내는 것은 너무나 어렵다.
+
+<br>
 
 ## 참고
 
