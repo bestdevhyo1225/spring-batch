@@ -32,7 +32,7 @@
 
 <br>
 
-## StepScope, JobScope
+## @StepScope, @JobScope
 
 `Spring`에서 `Bean`의 기본 스코프는 `Singleton`이다. 그런데 `Spring Batch`에서 특별하게 사용되는 `StepScope`와 `JobScope`가 있다.
 
