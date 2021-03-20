@@ -22,8 +22,6 @@
 
 - 동일한 `Job Parameter`로 성공한 기록이 있을때만 재수행이 안되고, 실패한 기록이 있다면 재수행이 된다. (즉, 실패한 기록이 있는 상태에서 다시 실행하고, 성공 했을때 `JobInstanceAlreadyCompleteException`가 발생하지 않는다.)
 
-<br>
-
 ### BATCH_JOB_EXECUTION 메타 테이블
 
 - `BATCH_JOB_INSTANCE` 테이블과 `부모-자식` 관계이다.
@@ -45,8 +43,6 @@
 - 즉, `Bean의 생성 시점을 지정된 Scope가 실행되는 시점`으로 지연시킨다.
 
 - `Spring의 Request Scope` 처럼 `Step, Job이 실행되고 끝날때 생성 및 삭제가 이루어진다.`
-
-<br>
 
 ### Bean 생성 시점을 Application 실행 시점이 아닌, Step 혹은 Job의 실행 시점으로 지연 시키면서 얻는 장점?
 
@@ -73,8 +69,6 @@
 - `Job Parameter`는 Step, Tasklet, Reader등 Batch 컴포넌트 Bean 생성의 생성 시점에만 호출할 수 있다.
 
 - 정확히는 `Scope Bean`을 생성할때만 가능하다. 즉, `@StepScope`, `@JobScope`와 같은 `Bean을 생성할때만 Job Parameter가 생성되기 때문에 사용할 수 있다.`
-
-<br>
 
 ### Job Parameter vs 시스템 변수 (Job Parameter를 써야만 하는 이유)
 
