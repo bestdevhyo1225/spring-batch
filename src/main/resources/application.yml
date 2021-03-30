@@ -10,6 +10,10 @@ spring:
       # 즉, 혹시라도 값이 없을때 모든 배치가 실행되지 않도록 막는 역할이다.
       names: ${job.name:NONE}
 
+logging:
+  level:
+    org.springframework.batch: DEBUG
+
 --- # local
 spring:
   config:
