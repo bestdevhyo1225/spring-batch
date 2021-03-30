@@ -1,9 +1,5 @@
 # Batch Application
 
-- Spring Batch를 공부하고, 실습한다.
-
-- 중요한 내용들은 이해하고, 기록하자
-
 <br>
 
 ## BATCH_JOB_INSTANCE, BATCH_JOB_EXECUTION 메타 테이블
