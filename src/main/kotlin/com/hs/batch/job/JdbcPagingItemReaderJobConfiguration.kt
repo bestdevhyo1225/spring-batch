@@ -68,6 +68,12 @@ class JdbcPagingItemReaderJobConfiguration(
         }
     }
 
+    /*
+    * Spring Batch에서는 offset과 limit을 PageSize에 맞게 자동으로 생성해 줍니다.
+    * 다만 각 쿼리는 개별적으로 실행한다는 점을 유의해야합니다.
+    * 각 페이지마다 새로운 쿼리를 실행하므로 페이징시 결과를 정렬하는 것이 중요합니다.
+    * */
+
     @Bean
     fun createQueryProvider(): PagingQueryProvider {
         val queryProvider = SqlPagingQueryProviderFactoryBean()

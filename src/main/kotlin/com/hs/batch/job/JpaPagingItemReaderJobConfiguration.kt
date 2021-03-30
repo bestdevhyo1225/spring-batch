@@ -35,7 +35,7 @@ class JpaPagingItemReaderJobConfiguration(
     @Bean
     fun jpaPagingItemReaderStep(): Step {
         return stepBuilderFactory.get("jpaPagingItemReaderStep")
-            .chunk<Pay, Pay>(chunkSize)
+            .chunk<Pay, Pay>(chunkSize) // 첫번째 Pay는 Reader에서 반환할 타입, 두번째 Pay는 Writer에 파라미터로 넘어올 타입
             .reader(jpaPagingItemReader())
             .writer(jpaPagingItemWriter())
             .build()
