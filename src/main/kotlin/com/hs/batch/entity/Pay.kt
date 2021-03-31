@@ -27,6 +27,14 @@ class Pay(amount: Long, txName: String, txDateTime: String) {
     var txDateTime: LocalDateTime = LocalDateTime.parse(txDateTime, FORMATTER)
         protected set
 
+    fun setamount (amount: Long) {
+        this.amount = amount
+    }
+
+    fun settxName (txName: String) {
+        this.txName = txName
+    }
+
     override fun toString() = kotlinToString(properties = toStringProperties)
     override fun equals(other: Any?) = kotlinEquals(other = other, properties = equalsAndHashCodeProperties)
     override fun hashCode() = kotlinHashCode(properties = equalsAndHashCodeProperties)

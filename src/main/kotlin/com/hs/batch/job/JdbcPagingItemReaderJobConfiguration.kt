@@ -50,7 +50,7 @@ class JdbcPagingItemReaderJobConfiguration(
 
         return JdbcPagingItemReaderBuilder<Pay>()
             .pageSize(chunkSize)
-            .fetchSize(chunkSize)
+//            .fetchSize(chunkSize)
             .dataSource(dataSource)
             .rowMapper(BeanPropertyRowMapper(Pay::class.java))
             .queryProvider(createQueryProvider())
