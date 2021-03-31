@@ -52,7 +52,6 @@ class JpaPagingItemReaderJobConfiguration(
     }
 
     private fun jpaPagingItemWriter(): ItemWriter<Pay> {
-
         return ItemWriter<Pay> { list ->
             for (pay in list) {
                 logger.info("Pay Id = {}", pay.id)

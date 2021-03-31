@@ -7,9 +7,8 @@ import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import javax.persistence.*
 
-
 @Entity
-class Pay(amount: Long, txName: String, txDateTime: String) {
+class Pay2(amount: Long, txName: String, txDateTime: String) {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,30 +26,18 @@ class Pay(amount: Long, txName: String, txDateTime: String) {
     var txDateTime: LocalDateTime = LocalDateTime.parse(txDateTime, FORMATTER)
         protected set
 
-    fun setamount (amount: Long) {
-        this.amount = amount
-    }
-
-    fun settxName (txName: String) {
-        this.txName = txName
-    }
-
-    fun settxDateTime (txDateTime: LocalDateTime) {
-        this.txDateTime = txDateTime
-    }
-
     override fun toString() = kotlinToString(properties = toStringProperties)
     override fun equals(other: Any?) = kotlinEquals(other = other, properties = equalsAndHashCodeProperties)
     override fun hashCode() = kotlinHashCode(properties = equalsAndHashCodeProperties)
 
     companion object {
         private val FORMATTER: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
-        private val equalsAndHashCodeProperties = arrayOf(Pay::id)
+        private val equalsAndHashCodeProperties = arrayOf(Pay2::id)
         private val toStringProperties = arrayOf(
-            Pay::id,
-            Pay::amount,
-            Pay::txName,
-            Pay::txDateTime,
+            Pay2::id,
+            Pay2::amount,
+            Pay2::txName,
+            Pay2::txDateTime,
         )
     }
 }
