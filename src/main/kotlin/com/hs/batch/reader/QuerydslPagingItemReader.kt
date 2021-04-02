@@ -26,13 +26,13 @@ open class QuerydslPagingItemReader<T>(
     protected val queryFunction: Function<JPAQueryFactory, JPAQuery<T>>
 
     /**
-     * Reader의 트랜잭션격리 옵션 <br/>
-     * - false: 격리 시키지 않고, Chunk 트랜잭션에 의존한다 <br/>
-     * (hibernate.default_batch_fetch_size 옵션 사용가능) <br/>
-     * - true: 격리 시킨다 <br/>
+     * Reader의 트랜잭션격리 옵션
+     * - false: 격리 시키지 않고, Chunk 트랜잭션에 의존한다
+     * (hibernate.default_batch_fetch_size 옵션 사용가능)
+     * - true: 격리 시킨다
      * (Reader 조회 결과를 삭제하고 다시 조회했을때 삭제된게 반영되고 조회되길 원할때 사용한다.)
      */
-    private var transacted = true //default value
+    private var transacted = true // default value
 
     init {
         this.setName(ClassUtils.getShortName(QuerydslPagingItemReader::class.java))
