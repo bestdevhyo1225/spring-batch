@@ -1,3 +1,4 @@
+import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -8,6 +9,7 @@ plugins {
     kotlin("plugin.jpa") version "1.4.31"
     /* JPA Proxy 객체를 만들기 위해서 반드시 적용해야 함 */
     kotlin("plugin.allopen") version "1.4.31"
+    kotlin("kapt") version "1.4.31"
 }
 
 // JPA Proxy 객체를 만들기 위해서 반드시 적용해야 함 - 상속 가능하도록 Open 처리
@@ -21,6 +23,12 @@ group = "com.hs"
 version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_11
 
+configurations {
+    compileOnly {
+        extendsFrom(configurations.annotationProcessor.get())
+    }
+}
+
 repositories {
     mavenCentral()
     jcenter()
@@ -33,10 +41,22 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("au.com.console:kassava:2.1.0-rc.1")
+
+    /* querydsl 추가 시작 */
+    implementation("com.querydsl:querydsl-jpa")
+    kapt("com.querydsl:querydsl-apt")
+    annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
+    annotationProcessor(group = "com.querydsl", name = "querydsl-apt", classifier = "jpa")
+    /* querydsl 추가 끝 */
+
     runtimeOnly("com.h2database:h2")
     runtimeOnly("mysql:mysql-connector-java")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.batch:spring-batch-test")
+}
+
+sourceSets["main"].withConvention(KotlinSourceSet::class){
+    kotlin.srcDir("$buildDir/generated/querydsl")
 }
 
 tasks.withType<KotlinCompile> {
