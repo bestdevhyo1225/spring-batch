@@ -22,7 +22,7 @@ open class QuerydslPagingItemReader<T>(
 
     private val jpaPropertyMap: Map<String, Any> = HashMap()
     private val entityManagerFactory: EntityManagerFactory
-    private lateinit var entityManager: EntityManager
+    protected lateinit var entityManager: EntityManager
     protected val queryFunction: Function<JPAQueryFactory, JPAQuery<T>>
 
     /**
@@ -69,13 +69,13 @@ open class QuerydslPagingItemReader<T>(
         }
     }
 
-    protected fun createQuery(): JPAQuery<T> {
+    protected open fun createQuery(): JPAQuery<T> {
         val jpaQueryFactory = JPAQueryFactory(entityManager)
         return queryFunction.apply(jpaQueryFactory)
     }
 
     protected fun initResults() {
-        if (CollectionUtils.isEmpty(results)) {
+        if (CollectionUtils.isEmpty(results)) { // CollectionUtils.isEmpty -> 널 체크까지 해준다.
             results = CopyOnWriteArrayList()
         } else {
             results.clear()

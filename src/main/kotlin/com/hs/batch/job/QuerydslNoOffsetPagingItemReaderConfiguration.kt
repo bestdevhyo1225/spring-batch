@@ -3,7 +3,8 @@ package com.hs.batch.job
 import com.hs.batch.entity.Pay
 import com.hs.batch.entity.Pay2
 import com.hs.batch.entity.QPay.pay
-import com.hs.batch.reader.QuerydslPagingItemReader
+import com.hs.batch.reader.QuerydslNoOffsetPagingItemReader
+import com.hs.batch.reader.options.QuerydslNoOffsetPagingOptions
 import org.springframework.batch.core.Job
 import org.springframework.batch.core.Step
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory
@@ -18,7 +19,7 @@ import java.time.format.DateTimeFormatter
 import javax.persistence.EntityManagerFactory
 
 @Configuration
-class QuerydslPagingItemReaderConfiguration(
+class QuerydslNoOffsetPagingItemReaderConfiguration(
     @Value("\${chunk-size}")
     private val chunkSize: Int,
     private val jobBuilderFactory: JobBuilderFactory,
@@ -27,7 +28,7 @@ class QuerydslPagingItemReaderConfiguration(
 ) {
 
     companion object {
-        private const val JOB_NAME = "QuerydslPagingItemReader"
+        private const val JOB_NAME = "QuerydslNoOffsetPagingItemReader"
         private const val BEAN_PREFIX = JOB_NAME + "_"
     }
 
@@ -38,6 +39,7 @@ class QuerydslPagingItemReaderConfiguration(
             .start(step())
             .build()
     }
+
 
     @Bean(value = [BEAN_PREFIX + "step"])
     fun step(): Step {
@@ -50,13 +52,15 @@ class QuerydslPagingItemReaderConfiguration(
     }
 
     @Bean(value = [BEAN_PREFIX + "reader"])
-    fun reader(): QuerydslPagingItemReader<Pay> {
-        return QuerydslPagingItemReader(
+    fun reader(): QuerydslNoOffsetPagingItemReader<Pay> {
+        return QuerydslNoOffsetPagingItemReader(
             entityManagerFactory = entityManagerFactory,
             queryFunction = { queryFactory -> queryFactory.selectFrom(pay) },
-            pageSize = chunkSize
+            pageSize = chunkSize,
+            noOffsetPagingOptions = QuerydslNoOffsetPagingOptions()
         )
     }
+
 
     private fun processor(): ItemProcessor<Pay, Pay2> {
         return ItemProcessor { pay ->
