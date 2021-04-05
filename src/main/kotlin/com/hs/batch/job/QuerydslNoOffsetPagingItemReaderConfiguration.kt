@@ -57,7 +57,7 @@ class QuerydslNoOffsetPagingItemReaderConfiguration(
             entityManagerFactory = entityManagerFactory,
             queryFunction = { queryFactory -> queryFactory.selectFrom(pay) },
             pageSize = chunkSize,
-            noOffsetPagingOptions = QuerydslNoOffsetPagingOptions()
+            noOffsetPagingOptions = QuerydslNoOffsetPagingOptions(fieldOfNumber = pay.id)
         )
     }
 

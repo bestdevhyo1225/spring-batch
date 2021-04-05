@@ -12,10 +12,10 @@ class QuerydslNoOffsetPagingItemReader<T>(
     entityManagerFactory: EntityManagerFactory,
     queryFunction: Function<JPAQueryFactory, JPAQuery<T>>,
     pageSize: Int,
-    noOffsetPagingOptions: QuerydslNoOffsetPagingOptions<T>,
+    noOffsetPagingOptions: QuerydslNoOffsetPagingOptions<T, Long>,
 ) : QuerydslPagingItemReader<T>(entityManagerFactory, queryFunction, pageSize) {
 
-    private val noOffsetPagingOptions: QuerydslNoOffsetPagingOptions<T>
+    private val noOffsetPagingOptions: QuerydslNoOffsetPagingOptions<T, Long>
 
     init {
         setName(ClassUtils.getShortName(QuerydslNoOffsetPagingItemReader::class.java))

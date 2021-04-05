@@ -52,7 +52,7 @@ class QuerydslNoOffsetPagingItemReaderConfigurationTest {
             entityManagerFactory = entityManagerFactory,
             queryFunction = { queryFactory -> queryFactory.selectFrom(pay) },
             pageSize = pageSize,
-            noOffsetPagingOptions = QuerydslNoOffsetPagingOptions()
+            noOffsetPagingOptions = QuerydslNoOffsetPagingOptions(fieldOfNumber = pay.id)
         )
 
         reader.open(ExecutionContext())

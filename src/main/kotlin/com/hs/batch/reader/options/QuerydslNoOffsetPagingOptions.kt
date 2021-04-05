@@ -1,11 +1,11 @@
 package com.hs.batch.reader.options
 
-import com.hs.batch.entity.QPay.pay
 import com.querydsl.core.types.dsl.BooleanExpression
+import com.querydsl.core.types.dsl.NumberPath
 import com.querydsl.jpa.impl.JPAQuery
 import java.lang.reflect.Field
 
-class QuerydslNoOffsetPagingOptions<T> {
+class QuerydslNoOffsetPagingOptions<T, N>(private val fieldOfNumber: NumberPath<N>) where N : Number, N : Comparable<*> {
 
     private var isFirstPage: Boolean = true
     private var currentKey: Long? = null
@@ -15,9 +15,8 @@ class QuerydslNoOffsetPagingOptions<T> {
             val cloneQuery: JPAQuery<T> = query.clone()
 
             currentKey = cloneQuery
-                .select(pay.id)
-                .from(pay)
-                .orderBy(pay.id.asc())
+                .select(fieldOfNumber.castToNum(Long::class.java))
+                .orderBy(fieldOfNumber.asc())
                 .fetchFirst()
         }
     }
@@ -25,15 +24,15 @@ class QuerydslNoOffsetPagingOptions<T> {
     fun createQuery(query: JPAQuery<T>): JPAQuery<T> {
         if (currentKey == null) return query
 
-        return query.where(payIdGoeOrGtCurrentKey())
+        return query.where(fieldGoeOrGtCurrentKey())
     }
 
-    private fun payIdGoeOrGtCurrentKey(): BooleanExpression {
+    private fun fieldGoeOrGtCurrentKey(): BooleanExpression {
         return if (isFirstPage) {
             isFirstPage = false
-            pay.id.goe(currentKey)
+            fieldOfNumber.goe(currentKey)
         } else {
-            pay.id.gt(currentKey)
+            fieldOfNumber.gt(currentKey)
         }
     }
 
