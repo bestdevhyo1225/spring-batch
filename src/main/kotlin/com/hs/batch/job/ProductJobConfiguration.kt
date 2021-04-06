@@ -1,9 +1,6 @@
 package com.hs.batch.job
 
-import com.hs.batch.entity.Pay
-import com.hs.batch.entity.Pay2
 import com.hs.batch.entity.Product
-import com.hs.batch.entity.ProductImage
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.batch.core.Job
@@ -11,7 +8,6 @@ import org.springframework.batch.core.Step
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory
 import org.springframework.batch.item.ItemProcessor
-import org.springframework.batch.item.ItemWriter
 import org.springframework.batch.item.database.JpaItemWriter
 import org.springframework.batch.item.database.JpaPagingItemReader
 import org.springframework.batch.item.database.builder.JpaPagingItemReaderBuilder
