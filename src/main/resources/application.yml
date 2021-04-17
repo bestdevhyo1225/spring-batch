@@ -40,17 +40,12 @@ spring:
     hikari:
       # profileSQL=true : Driver에서 전송하는 쿼리를 출력합니다.
       # logger=Slf4JLogger : Driver에서 쿼리 출력시 사용할 Logger를 설정합니다.
-      #   - MySQL 드라이버 : 기본값은 System.err 로 출력하도록 설정되어 있기 때문에 필수로 지정해 줘야 합니다.
-      #   - MariaDB 드라이버 : Slf4j 를 이용하여 로그를 출력하기 때문에 설정할 필요가 없습니다.
-      # maxQuerySizeToLog=999999 : 출력할 쿼리 길이
-      #   - MySQL 드라이버 : 기본값이 0 으로 지정되어 있어 값을 설정하지 않을경우 아래처럼 쿼리가 출력되지 않습니다.
-      #     - [main] MySQL : [QUERY]  ... (truncated) [Created on: Mon Sep 21 01:03:10 KST 2020, duration: 3,
-      #       connection-id: 325, statement-id: 0, resultset-id: 0,
-      #       at com.zaxxer.hikari.pool.ProxyStatement.executeBatch(ProxyStatement.java:128)]
-      #   - MariaDB 드라이버 : 기본값이 1024 로 지정되어 있습니다. MySQL 드라이버와는 달리 0으로 지정시 쿼리의 글자 제한이 무제한으로 설정됩니다.
+      #   - MySQL 드라이버 : com.mysql.jdbc.log.StandardLogger 를 기본적으로 사용한다.
+      # maxQuerySizeToLog=500 : 출력할 쿼리 길이
+      #   - MySQL 드라이버 : 기본값이 2048로 지정되어 있다.
       jdbc-url: >
         jdbc:mysql://localhost:9020/spring_batch?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
-        &profileSQL=true&logger=Slf4JLogger&maxQuerySizeToLog=999999&rewriteBatchedStatements=true
+        &rewriteBatchedStatements=true&profileSQL=true&logger=Slf4JLogger&maxQuerySizeToLog=200
       username: root
       password: example
       driver-class-name: com.mysql.cj.jdbc.Driver
