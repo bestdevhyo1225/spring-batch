@@ -62,6 +62,7 @@ class ProductJobConfiguration(
             Product.create(
                 name = product.name + "_구매",
                 amounts = product.amounts * -1,
+                createDate = product.createDate,
                 productImages = product.productImages
             )
         }

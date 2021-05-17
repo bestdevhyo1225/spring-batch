@@ -6,7 +6,6 @@ import com.hs.batch.entity.Pay2
 import com.hs.batch.job.QuerydslNoOffsetPagingItemReaderConfiguration
 import com.hs.batch.repository.Pay2Repository
 import com.hs.batch.repository.PayRepository
-import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Test

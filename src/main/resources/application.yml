@@ -16,6 +16,8 @@ logging:
 
 chunk-size: 10
 batch-size: 1000
+pool-size: 10
+queue-capacity: 100
 
 --- # local
 spring:

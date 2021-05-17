@@ -6,10 +6,8 @@ import com.hs.batch.entity.Pay2
 import com.hs.batch.job.JpaItemWriterJobConfiguration
 import com.hs.batch.repository.Pay2Repository
 import com.hs.batch.repository.PayRepository
-import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.*
 import org.junit.jupiter.api.AfterEach
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.batch.core.BatchStatus
 import org.springframework.batch.core.JobExecution

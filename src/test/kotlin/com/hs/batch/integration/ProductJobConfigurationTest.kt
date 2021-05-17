@@ -14,6 +14,7 @@ import org.springframework.batch.test.JobLauncherTestUtils
 import org.springframework.batch.test.context.SpringBatchTest
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
+import java.time.LocalDate
 
 @SpringBootTest(classes = [TestBatchConfig::class, ProductJobConfiguration::class])
 @SpringBatchTest
@@ -31,8 +32,10 @@ class ProductJobConfigurationTest {
         val productImages1: List<ProductImage> = listOf(ProductImage(url = "url-1"), ProductImage(url = "url-2"))
         val productImages2: List<ProductImage> = listOf(ProductImage(url = "url-3"), ProductImage(url = "url-4"))
 
-        val product1 = Product.create(name = "상품1", amounts = 10_000, productImages = productImages1)
-        val product2 = Product.create(name = "상품2", amounts = 20_000, productImages = productImages2)
+        val product1 =
+            Product.create(name = "상품1", amounts = 10_000, createDate = LocalDate.now(), productImages = productImages1)
+        val product2 =
+            Product.create(name = "상품2", amounts = 20_000, createDate = LocalDate.now(), productImages = productImages2)
 
         productRepository.save(product1)
         productRepository.save(product2)
