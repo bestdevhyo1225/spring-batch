@@ -95,7 +95,10 @@ class MultiThreadPagingConfiguration(
             .pageSize(chunkSize)
             .queryString("SELECT p FROM Product p WHERE p.createDate =: createDate")
             .parameterValues(params)
-            .saveState(false) // 멀티 스레드 환경에서 필수적으로 사용해야하는 옵션
+            /*  saveStatus(...) : 멀티 스레드 환경에서 필수적으로 사용해야하는 옵션,
+                해당 옵션을 끄게 되면 (false) Reader 가 실패한 지점을 저장하지 못하게해,
+                다음 실행시에도 무조건 처음부터 다시 읽도록 합니다. */
+            .saveState(false)
             .build()
     }
 
