@@ -17,6 +17,7 @@ logging:
 chunk-size: 10
 batch-size: 1000
 pool-size: 10
+partition-pool-size: 5
 queue-capacity: 100
 
 --- # local
