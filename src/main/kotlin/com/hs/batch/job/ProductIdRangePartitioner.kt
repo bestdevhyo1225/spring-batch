@@ -22,7 +22,7 @@ class ProductIdRangePartitioner(
         var start: Long = minId
         var end: Long = start + targetSize - 1
 
-        while (start <= end) {
+        while (start <= maxId) {
             val executionContext = ExecutionContext()
 
             result["partition-$number"] = executionContext
