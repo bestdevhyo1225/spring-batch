@@ -102,7 +102,7 @@ class PartitionJobConfiguration(
         @Value("#{jobParameters['endDate']}") endDate: String?
     ): ProductIdRangePartitioner {
         val startLocalDate = LocalDate.parse(startDate, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
-        val endLocalDate = LocalDate.parse(startDate, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+        val endLocalDate = LocalDate.parse(endDate, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
 
         return ProductIdRangePartitioner(
             productRepository = productRepository,
