@@ -20,7 +20,7 @@ pool-size: 10
 partition-pool-size: 5
 queue-capacity: 100
 
---- # local
+---
 spring:
   config:
     activate:
@@ -33,7 +33,7 @@ spring:
       password:
       driver-class-name: org.h2.Driver
 
---- # mysql
+---
 spring:
   config:
     activate:
